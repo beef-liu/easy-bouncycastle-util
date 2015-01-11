@@ -63,10 +63,10 @@ public class OpenPGPUtil {
 		boolean armor = false;
 		boolean withIntegrityCheck = true;
 		
-		FileInputStream publicKeyInput = null;
+		InputStream publicKeyInput = null;
 		
 		try {
-			publicKeyInput = new FileInputStream(publicKey);
+			publicKeyInput = new BufferedInputStream(new FileInputStream(publicKey));
 			encrypt(publicKeyInput, input, output, armor, withIntegrityCheck);
 		} finally {
 			publicKeyInput.close();
@@ -99,7 +99,7 @@ public class OpenPGPUtil {
 		InputStream inputFile = null;
 
 		try {
-			inputFile = new FileInputStream(input);
+			inputFile = new BufferedInputStream(new FileInputStream(input));
 
 			decryptFile(privateKey, password.toCharArray(), inputFile, output);
 		} finally {
@@ -116,8 +116,8 @@ public class OpenPGPUtil {
 		InputStream inputFile = null;
 
 		try {
-			inputKey = new FileInputStream(privateKey);
-			inputFile = new FileInputStream(input);
+			inputKey = new BufferedInputStream(new FileInputStream(privateKey));
+			inputFile = new BufferedInputStream(new FileInputStream(input));
 
 			decryptFile(inputKey, password.toCharArray(), inputFile, output);
 		} finally {
@@ -166,14 +166,15 @@ public class OpenPGPUtil {
 			throws IOException {
 		PGPCompressedDataGenerator comData = new PGPCompressedDataGenerator(
 				algorithm);
+		ByteArrayOutputStream bOut = new ByteArrayOutputStream();
 		try {
-			ByteArrayOutputStream bOut = new ByteArrayOutputStream();
 			PGPUtil.writeFileToLiteralData(comData.open(bOut),
 					PGPLiteralData.BINARY, file);
-			return bOut.toByteArray();
 		} finally {
 			comData.close();
 		}
+		
+		return bOut.toByteArray();
 	}
 
 	protected static PGPPrivateKey findSecretKey(

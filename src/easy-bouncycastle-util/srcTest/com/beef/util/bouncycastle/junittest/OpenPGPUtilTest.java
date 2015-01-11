@@ -28,6 +28,7 @@ public class OpenPGPUtilTest {
 			
 			//decrypt
 			OpenPGPUtil.decrypt(privateKeyFile, TestPassphrase, encFile, decFile);
+			
 		} catch(Throwable e) {
 			e.printStackTrace();
 		}
