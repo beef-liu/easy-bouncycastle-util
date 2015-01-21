@@ -6,10 +6,11 @@ bouncycastle is a great java lib but hard to use. This lib is for using bouncyca
 
 Though the name is "easy-bouncycastle-util", this project does not only include utils which wraps bouncycastle but also includes some algorithms supported by provider of JDK. It could be considered as a package of test cases of crypto algorithms.
 
-By now, things which done are below:
+By now, there are test cases:
 * Gnu pgp
 * ECDSA
 * AES
 * some basic utils such as: Base58, Hex, Digest(SHA-1, SHA-256, RIPEMD, MD5)
+* DiffieHellman
 
 All work is for make crypto easilier.
