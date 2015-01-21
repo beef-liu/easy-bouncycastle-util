@@ -8,24 +8,24 @@ import org.junit.Test;
 
 import com.beef.util.bouncycastle.ISignature;
 import com.beef.util.bouncycastle.junittest.TestECDSAinJDK7Provider.ECDSABinaryCipher;
-import com.beef.util.bouncycastle.sign.ECDSAPrimeCipher;
+import com.beef.util.bouncycastle.sign.ECDSAPrimeSignature;
 import com.beef.util.bouncycastle.util.Base58Util;
 import com.beef.util.bouncycastle.util.HexUtil;
 
 public class TestSignCipher {
 
 	public void testECDSAPrime2() {
-		ECDSAPrimeCipher signature = new ECDSAPrimeCipher();
+		ECDSAPrimeSignature signature = new ECDSAPrimeSignature();
 		
-		testSignCipher2(signature, ECDSAPrimeCipher.KEY_BIT_LEN_256, ECDSABinaryCipher.SIGN_ALGORITHM_SHA256_WITH_ECDSA);
+		testSignCipher2(signature, ECDSAPrimeSignature.KEY_BIT_LEN_256, ECDSABinaryCipher.SIGN_ALGORITHM_SHA256_WITH_ECDSA);
 	}
 
 	
 	@Test
 	public void testECDSAPrime() {
-		ECDSAPrimeCipher signature = new ECDSAPrimeCipher();
+		ECDSAPrimeSignature signature = new ECDSAPrimeSignature();
 		
-		testSignature(signature, ECDSAPrimeCipher.KEY_BIT_LEN_256, ECDSAPrimeCipher.SIGN_ALGORITHM_SHA256_WITH_ECDSA);
+		testSignature(signature, ECDSAPrimeSignature.KEY_BIT_LEN_256, ECDSAPrimeSignature.SIGN_ALGORITHM_SHA256_WITH_ECDSA);
 	}
 	
 

@@ -28,7 +28,7 @@ import com.beef.util.bouncycastle.util.BouncyCastle;
  * @author XingGu Liu
  *
  */
-public class ECDSAPrimeCipher implements ISignature {
+public class ECDSAPrimeSignature implements ISignature {
 	public final static String SIGN_ALGORITHM_NONE_WITH_ECDSA = "NONEwithECDSA";
 	public final static String SIGN_ALGORITHM_RIPEMD160_WITH_ECDSA = "RIPEMD160withECDSA";
 	public final static String SIGN_ALGORITHM_SHA1_WITH_ECDSA = "SHA1withECDSA";
