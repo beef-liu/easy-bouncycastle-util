@@ -1,5 +1,9 @@
 package com.beef.util.bouncycastle.junittest;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.junit.Test;
 
 import com.beef.util.bouncycastle.crypto.AESCipher;
@@ -33,7 +37,7 @@ public class TestEncryptCipher {
 	
 	public void testAes() {
 		String key = "01234567890123450123456789012345";
-		String input = "Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);";
+		String input = "Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/ECB/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);";
 		
 		byte[] keyBytes = key.getBytes();
 		byte[] inputBytes = input.getBytes();
@@ -51,4 +55,34 @@ public class TestEncryptCipher {
 		}
 	}
 
+	public void test1() {
+		String key = "01234567890123450123456789012345";
+		String input = "Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/ECB/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);Cipher cipher = Cipher.getInstance(RC5/CBC/PKCS5Padding);";
+		
+		byte[] keyBytes = key.getBytes();
+		byte[] inputBytes = input.getBytes();
+
+		try {
+			byte[] encBytes;
+			byte[] decBytes;
+			
+			SecretKey secretKey = new SecretKeySpec(keyBytes, "AES");
+
+			{
+				Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+				cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+				encBytes = cipher.doFinal(inputBytes);
+			}
+			
+			{
+				Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+				cipher.init(Cipher.DECRYPT_MODE, secretKey);
+				decBytes = cipher.doFinal(encBytes);
+			}
+			
+			System.out.println("dec::" + new String(decBytes));
+		} catch(Throwable e) {
+			e.printStackTrace();
+		}
+	}
 }

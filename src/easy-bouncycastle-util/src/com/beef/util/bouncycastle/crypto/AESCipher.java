@@ -24,8 +24,7 @@ public class AESCipher implements ICipher {
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 			
-			cipher.update(input, offset, len);
-			return cipher.doFinal();
+			return cipher.doFinal(input, offset, len);
 		} catch(Throwable e) {
 			throw new CryptoException(e);
 		}
@@ -45,8 +44,7 @@ public class AESCipher implements ICipher {
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 			cipher.init(Cipher.DECRYPT_MODE, secretKey);
 			
-			cipher.update(input, offset, len);
-			return cipher.doFinal();
+			return cipher.doFinal(input, offset, len);
 		} catch(Throwable e) {
 			throw new CryptoException(e);
 		}
@@ -75,8 +73,7 @@ public class AESCipher implements ICipher {
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParamSpec);
 			
-			cipher.update(input, offset, len);
-			return cipher.doFinal();
+			return cipher.doFinal(input, offset, len);
 		} catch(Throwable e) {
 			throw new CryptoException(e);
 		}
@@ -100,8 +97,7 @@ public class AESCipher implements ICipher {
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 			cipher.init(Cipher.DECRYPT_MODE, secretKey, ivParamSpec);
 			
-			cipher.update(input, offset, len);
-			return cipher.doFinal();
+			return cipher.doFinal(input, offset, len);
 		} catch(Throwable e) {
 			throw new CryptoException(e);
 		}
