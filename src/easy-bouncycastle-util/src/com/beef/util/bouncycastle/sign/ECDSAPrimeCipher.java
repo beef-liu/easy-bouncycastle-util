@@ -23,6 +23,11 @@ import com.beef.util.bouncycastle.CryptoException;
 import com.beef.util.bouncycastle.ISignature;
 import com.beef.util.bouncycastle.util.BouncyCastle;
 
+/**
+ * reference doc: http://www.bouncycastle.org/wiki/pages/viewpage.action?pageId=362269
+ * @author XingGu Liu
+ *
+ */
 public class ECDSAPrimeCipher implements ISignature {
 	public final static String SIGN_ALGORITHM_NONE_WITH_ECDSA = "NONEwithECDSA";
 	public final static String SIGN_ALGORITHM_RIPEMD160_WITH_ECDSA = "RIPEMD160withECDSA";
