@@ -1,12 +1,10 @@
 package com.beef.util.bouncycastle.junittest;
 
-import static org.junit.Assert.*;
-
 import java.io.File;
 
 import org.junit.Test;
 
-import com.beef.util.bouncycastle.OpenPGPUtil;
+import com.beef.util.bouncycastle.util.OpenPGPUtil;
 
 public class OpenPGPUtilTest {
 	private final static String TestPassphrase = "xko33h73";

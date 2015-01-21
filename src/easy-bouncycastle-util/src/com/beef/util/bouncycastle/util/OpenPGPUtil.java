@@ -1,4 +1,4 @@
-package com.beef.util.bouncycastle;
+package com.beef.util.bouncycastle.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
