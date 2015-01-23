@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.AlgorithmParameterGenerator;
 import java.security.AlgorithmParameters;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.InvalidParameterSpecException;
 
 import javax.crypto.spec.DHParameterSpec;
@@ -26,6 +27,45 @@ public class DiffieHellmanUtil {
 		DHParameterSpec paramSpec = params.getParameterSpec(DHParameterSpec.class);
 		
 		return paramSpec;
+	}
+	
+	public final static BigInteger makeRandomPrivateKey(int keyBitSize) throws NoSuchAlgorithmException {
+		byte[] buffer = new byte[keyBitSize / 8];
+		
+		SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+		random.nextBytes(buffer);
+		
+		if((buffer[0] & 0x80) != 0) {
+			buffer[0] &= 0x7F;
+		}
+		
+		BigInteger i = new BigInteger(buffer);
+		
+		return i;
+	}
+	
+	/**
+	 * Set the most left bit to 0 when privateKey.length * 8 == keyBitSize.
+	 * Because bit length of the private key must be (keyBitSize - 1) in DiffieHellman algorithm.
+	 * @param keyBitSize
+	 * @param privateKey
+	 * @return formatted key
+	 */
+	public final static BigInteger formalizePrivateKey(int keyBitSize, byte[] privateKey) {
+		if((privateKey.length * 8) == keyBitSize) {
+			if((privateKey[0] & 0x80) != 0) {
+				byte[] buffer = new byte[privateKey.length];
+				System.arraycopy(privateKey, 0, buffer, 0, privateKey.length);
+				
+				buffer[0] &= 0x7F;
+				
+				return new BigInteger(buffer);
+			} else {
+				return new BigInteger(privateKey);
+			}
+		} else {
+			return new BigInteger(privateKey);
+		}
 	}
 	
 	/**
