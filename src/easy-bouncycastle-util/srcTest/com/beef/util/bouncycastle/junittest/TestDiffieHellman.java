@@ -18,6 +18,32 @@ import com.beef.util.bouncycastle.util.DiffieHellmanUtil;
 public class TestDiffieHellman {
 	
 	@Test
+	public void test3() {
+		try {
+			int keyBitSize = 1024;
+			DHParameterSpec paramSpecInit = DiffieHellmanUtil.createDHParamSpec(keyBitSize);
+
+			long beginTime = System.currentTimeMillis();
+
+			for(int i = 0; i < 10; i++) {
+				DHParameterSpec paramSpec = new DHParameterSpec(paramSpecInit.getP(), paramSpecInit.getG(), paramSpecInit.getL());
+				
+				BigInteger x = makeRandomBigIntegerForDH(keyBitSize);
+				BigInteger y = makeRandomBigIntegerForDH(keyBitSize);
+				
+				//BigInteger pubKeyX = DiffieHellmanUtil.generatePublicKey(paramSpec, x);
+				BigInteger pubKeyY = DiffieHellmanUtil.generatePublicKey(paramSpec, y);
+				
+				BigInteger secretKeyX = DiffieHellmanUtil.generateSecretKey(paramSpec, pubKeyY, x);
+				//BigInteger secretKeyY = DiffieHellmanUtil.generateSecretKey(paramSpec, pubKeyX, y);
+			}
+			
+			System.out.println("cost(ms):" + (System.currentTimeMillis() - beginTime));
+		} catch(Throwable e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void test2() {
 		try {
 			int keyBitSize = 1024;
@@ -38,7 +64,7 @@ public class TestDiffieHellman {
 		}
 	}
 	
-	
+	@Test
 	public void test1() {
 		try {
 //			byte b;
