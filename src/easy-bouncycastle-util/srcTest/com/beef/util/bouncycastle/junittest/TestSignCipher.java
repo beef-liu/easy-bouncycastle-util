@@ -9,11 +9,19 @@ import org.junit.Test;
 import com.beef.util.bouncycastle.ISignature;
 import com.beef.util.bouncycastle.junittest.TestECDSAinJDK7Provider.ECDSABinaryCipher;
 import com.beef.util.bouncycastle.sign.ECDSAPrimeSignature;
+import com.beef.util.bouncycastle.sign.RSASignature;
 import com.beef.util.bouncycastle.util.Base58Util;
 import com.beef.util.bouncycastle.util.HexUtil;
 
 public class TestSignCipher {
 
+	@Test
+	public void testRSA() {
+		RSASignature signature = new RSASignature();
+		
+		testSignature(signature, RSASignature.KEY_BIT_LEN_2048, RSASignature.SIGN_ALGORITHM_SHA1_WITH_RSA);
+	}
+	
 	public void testECDSAPrime2() {
 		ECDSAPrimeSignature signature = new ECDSAPrimeSignature();
 		
@@ -21,7 +29,6 @@ public class TestSignCipher {
 	}
 
 	
-	@Test
 	public void testECDSAPrime() {
 		ECDSAPrimeSignature signature = new ECDSAPrimeSignature();
 		
@@ -61,6 +68,7 @@ public class TestSignCipher {
 	
 	private void testSignature(ISignature signature, int keyBitLen, String signAlgo) {
 		try {
+			System.out.println("signAlgo:" + signAlgo);
 			
 			KeyPair keyPair = signature.generateKeyPair(keyBitLen);
 			
