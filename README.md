@@ -12,5 +12,6 @@ By now, there are test cases:
 * AES
 * some basic utils such as: Base58, Hex, Digest(SHA-1, SHA-256, RIPEMD, MD5)
 * DiffieHellman
+* RSA
 
 All work is for make crypto easilier.
