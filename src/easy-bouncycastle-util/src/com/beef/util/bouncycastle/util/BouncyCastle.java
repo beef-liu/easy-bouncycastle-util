@@ -10,7 +10,8 @@ public class BouncyCastle {
 	};
 
 	public static void initProvider() {
-		if(Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+		//if(Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) 
+		{
 			Security.addProvider(new BouncyCastleProvider());
 			
 			System.out.println("Security.addProvider:" + BouncyCastleProvider.PROVIDER_NAME);
