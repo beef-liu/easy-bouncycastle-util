@@ -12,13 +12,12 @@ import com.beef.util.bouncycastle.util.ByteArrayUtil;
 import com.beef.util.bouncycastle.util.DigestUtil;
 
 public class TestDigest {
-	static {
-		BouncyCastle.initProvider();
-	}
+//	static {
+//		BouncyCastle.initProvider();
+//	}
 	
 	private Random _rand = new Random(System.currentTimeMillis());
 
-	@Test
 	public void testCost() {
 		try {
 			long beginTime = System.currentTimeMillis();
@@ -96,10 +95,11 @@ public class TestDigest {
 		}
 	}
 	
+	@Test
 	public void test1() {
 		try {
 			byte[] input = "test".getBytes();
-			MessageDigest md = MessageDigest.getInstance("RIPEMD160", "BC");
+			MessageDigest md = MessageDigest.getInstance("RIPEMD160", BouncyCastle.Provider);
 			byte[] sign;
 			
 			{

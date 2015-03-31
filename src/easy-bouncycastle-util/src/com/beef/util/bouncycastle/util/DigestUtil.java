@@ -4,24 +4,25 @@ import java.security.DigestException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.Provider;
 
 public class DigestUtil {
-	static {
-		BouncyCastle.initProvider();
-	};
+//	static {
+//		BouncyCastle.initProvider();
+//	};
 	
 	public static byte[] ripemd160(byte[] input) throws NoSuchAlgorithmException, NoSuchProviderException {
 		return ripemd160(input, 0, input.length);
 	}
 	
 	public static byte[] ripemd160(byte[] input, int offset, int len) throws NoSuchAlgorithmException, NoSuchProviderException {
-		return digest("RIPEMD160", "BC", input, offset, len);
+		return digest("RIPEMD160", BouncyCastle.Provider, input, offset, len);
 	}
 
 	public static int ripemd160( 
 			byte[] input, int inputOffset, int inputLen,
 			byte[] output, int outputOffset, int outputLen) throws NoSuchAlgorithmException, DigestException, NoSuchProviderException {
-		return digest("RIPEMD160", "BC", input, inputOffset, inputLen, output, outputOffset, outputLen);
+		return digest("RIPEMD160", BouncyCastle.Provider, input, inputOffset, inputLen, output, outputOffset, outputLen);
 	}
 	
 	public static byte[] md5(byte[] input) throws NoSuchAlgorithmException {
@@ -101,7 +102,7 @@ public class DigestUtil {
 		return md.digest();
 	}
 	
-	public static byte[] digest(String algorithm, String provider, byte[] input, int offset, int len) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public static byte[] digest(String algorithm, Provider provider, byte[] input, int offset, int len) throws NoSuchAlgorithmException, NoSuchProviderException {
 		MessageDigest md = MessageDigest.getInstance(algorithm, provider);
 		
 		md.update(input, offset, len);
@@ -117,7 +118,7 @@ public class DigestUtil {
 		return md.digest(output, outputOffset, outputLen);
 	}
 	
-	public static int digest(String algorithm, String provider, 
+	public static int digest(String algorithm, Provider provider, 
 			byte[] input, int inputOffset, int inputLen,
 			byte[] output, int outputOffset, int outputLen) throws NoSuchAlgorithmException, NoSuchProviderException, DigestException {
 		MessageDigest md = MessageDigest.getInstance(algorithm, provider);

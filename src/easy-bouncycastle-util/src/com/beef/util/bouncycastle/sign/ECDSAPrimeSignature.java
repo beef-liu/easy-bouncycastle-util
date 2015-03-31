@@ -34,15 +34,15 @@ public class ECDSAPrimeSignature extends AbstractSignature {
 	public final static int KEY_BIT_LEN_256 = 256;
 	
 	
-	static {
-		BouncyCastle.initProvider();
-	};
+//	static {
+//		BouncyCastle.initProvider();
+//	};
 
 
 	@Override
 	public PrivateKey decodePrivateKey(byte[] encodedKey) throws CryptoException {
 		try {
-			KeyFactory keyFactory = KeyFactory.getInstance("ECDSA", "BC");
+			KeyFactory keyFactory = KeyFactory.getInstance("ECDSA", BouncyCastle.Provider);
 			PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(encodedKey);
 			
 			return keyFactory.generatePrivate(keySpec);
@@ -54,7 +54,7 @@ public class ECDSAPrimeSignature extends AbstractSignature {
 	@Override
 	public PublicKey decodePublicKey(byte[] encodedKey) throws CryptoException {
 		try {
-			KeyFactory keyFactory = KeyFactory.getInstance("ECDSA", "BC");
+			KeyFactory keyFactory = KeyFactory.getInstance("ECDSA", BouncyCastle.Provider);
 			X509EncodedKeySpec keySpec = new X509EncodedKeySpec(encodedKey);
 			
 			return keyFactory.generatePublic(keySpec);
@@ -69,7 +69,7 @@ public class ECDSAPrimeSignature extends AbstractSignature {
 		try {
 			ECParameterSpec ecSpec = ECNamedCurveTable.getParameterSpec(
 					"prime".concat(String.valueOf(keyBitLen)).concat("v1"));
-			KeyPairGenerator keyGen = KeyPairGenerator.getInstance("ECDSA", "BC");
+			KeyPairGenerator keyGen = KeyPairGenerator.getInstance("ECDSA", BouncyCastle.Provider);
 			
 			SecureRandom random = createSecureRandom();
 			keyGen.initialize(ecSpec, random);
