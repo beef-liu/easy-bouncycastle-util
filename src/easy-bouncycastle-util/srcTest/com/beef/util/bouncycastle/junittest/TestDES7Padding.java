@@ -4,6 +4,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.bouncycastle.util.encoders.Base64;
 import org.junit.Test;
 
 import com.beef.util.bouncycastle.CryptoException;
